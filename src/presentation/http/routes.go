@@ -1,7 +1,7 @@
 package main
 
 import (
-	authPresentation "main/src/auth/presentation"
+	auth "main/src/domain/auth"
 
 	"github.com/gorilla/mux"
 )
@@ -9,7 +9,7 @@ import (
 var routes = func() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
-	authPresentation.Routes(router)
+	auth.Routes(router)
 
 	return router
 }()
