@@ -1,4 +1,4 @@
-module main
+module github.com/lucas-silveira/simple-stock-go-api
 
 go 1.15
 
