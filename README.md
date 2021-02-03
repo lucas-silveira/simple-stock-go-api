@@ -1,0 +1,1 @@
+# Simple application of stock in go
