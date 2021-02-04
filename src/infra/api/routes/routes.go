@@ -1,4 +1,4 @@
-package auth
+package routes
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// Routes group all routes of auth aggregation
-func Routes(router *mux.Router) {
+// AuthRoutes group all routes of auth aggregation
+func AuthRoutes(router *mux.Router) {
 	authRouter := router.PathPrefix("/auth").Subrouter()
 
 	authRouter.HandleFunc("", func(resWriter http.ResponseWriter, req *http.Request) {
