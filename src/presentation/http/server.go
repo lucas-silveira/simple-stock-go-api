@@ -9,6 +9,6 @@ import (
 )
 
 func main() {
-	loggedRoutes := handlers.LoggingHandler(os.Stdout, routes)
+	loggedRoutes := handlers.LoggingHandler(os.Stdout, router)
 	log.Fatal(http.ListenAndServe(":3000", loggedRoutes))
 }

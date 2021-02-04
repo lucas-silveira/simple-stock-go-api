@@ -11,7 +11,7 @@ import (
 func Routes(router *mux.Router) {
 	authRouter := router.PathPrefix("/auth").Subrouter()
 
-	authRouter.HandleFunc("/", func(resWriter http.ResponseWriter, req *http.Request) {
+	authRouter.HandleFunc("", func(resWriter http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(resWriter, "Auth Router")
-	}).Methods("GET")
+	}).Methods("POST")
 }
