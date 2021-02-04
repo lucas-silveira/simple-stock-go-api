@@ -15,7 +15,13 @@ func PostAuthHandler(resWriter http.ResponseWriter, req *http.Request) {
 
 	body, _ := ioutil.ReadAll(req.Body)
 	json.Unmarshal(body, &authCredentialsDto)
-	authController.TryAuthenticate(authCredentialsDto)
+	authResponseDto, err := authController.TryAuthenticate(authCredentialsDto)
+
+	if err != nil {
+		resWriter.WriteHeader(err.StatusCode)
+		json.NewEncoder(resWriter).Encode(err)
+	}
 
 	resWriter.WriteHeader(http.StatusCreated)
+	json.NewEncoder(resWriter).Encode(authResponseDto)
 }
