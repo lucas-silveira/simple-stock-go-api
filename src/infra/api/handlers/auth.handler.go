@@ -3,13 +3,13 @@ package handlers
 import (
 	"encoding/json"
 	"main/src/application/controllers"
-	"main/src/application/dtos"
+	. "main/src/application/dtos"
 	"net/http"
 )
 
 // PostAuth handle post http request on auth route
 func PostAuth(w http.ResponseWriter, r *http.Request) {
-	var authCredentialsDto dtos.AuthCredentialsDto
+	var authCredentialsDto AuthCredentialsDto
 	var authController controllers.AuthController
 
 	json.NewDecoder(r.Body).Decode(&authCredentialsDto)

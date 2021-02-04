@@ -10,8 +10,8 @@ import (
 var Router = func() *mux.Router {
 	router := mux.NewRouter()
 
-	routes.AuthRoutes(router)
-	routes.UsersRoutes(router)
+	routes.Auth(router)
+	routes.Users(router)
 
 	return router
 }()

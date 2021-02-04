@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"main/src/application/dtos"
+	. "main/src/application/dtos"
 	"main/src/infra/errors"
 	"main/src/infra/utils"
 	"net/http"
@@ -16,7 +16,7 @@ import (
 type AuthController struct{}
 
 // TryAuthenticate ...
-func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.AuthCredentialsDto) (*dtos.AuthResponseDto, *errors.Http) {
+func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCredentialsDto) (*AuthResponseDto, *errors.Http) {
 	expirationTime := time.Now().Add(2 * 24 * time.Hour)
 	userID := "1"
 	claims := &utils.Claims{
@@ -37,7 +37,7 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.Aut
 	}
 
 	userIDParsed, _ := strconv.Atoi(userID)
-	authResponseDto := dtos.NewAuthResponseDto(userIDParsed, tokenString)
+	authResponseDto := NewAuthResponseDto(userIDParsed, tokenString)
 
 	return authResponseDto, nil
 }

@@ -4,14 +4,14 @@ import (
 	"github.com/gorilla/mux"
 
 	"main/src/infra/api/handlers"
-	"main/src/infra/api/middlewares"
+	. "main/src/infra/api/middlewares"
 )
 
-// UsersRoutes group all routes of auth aggregation
-func UsersRoutes(router *mux.Router) {
+// Users group all routes of auth aggregation
+func Users(router *mux.Router) {
 	authRouter := router.PathPrefix("/users").Subrouter()
 
-	authRouter.Use(middlewares.AuthMiddleware)
+	authRouter.Use(AuthMiddleware)
 
 	authRouter.HandleFunc("", handlers.GetAllUsers).Methods("GET")
 }

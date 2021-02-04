@@ -6,8 +6,8 @@ import (
 	"main/src/infra/api/handlers"
 )
 
-// AuthRoutes group all routes of auth aggregation
-func AuthRoutes(router *mux.Router) {
+// Auth group all routes of auth aggregation
+func Auth(router *mux.Router) {
 	authRouter := router.PathPrefix("/auth").Subrouter()
 
 	authRouter.HandleFunc("", handlers.PostAuth).Methods("POST")
