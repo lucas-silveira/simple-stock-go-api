@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,7 +13,8 @@ import (
 )
 
 func main() {
-	err := godotenv.Load("development.env")
+	envFile := fmt.Sprintf("%s.env", os.Getenv("APP_ENV"))
+	err := godotenv.Load(envFile)
 
 	if err != nil {
 		log.Fatalf("Error loading .env file")
