@@ -4,6 +4,7 @@ import (
 	"main/src/application/dtos"
 	"main/src/infra/errors"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -28,7 +29,7 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.Aut
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte("my_secret_key"))
+	tokenString, err := token.SignedString([]byte(os.Getenv("JWT_SECRET_KEY")))
 
 	if err != nil {
 		return nil, &errors.Http{
