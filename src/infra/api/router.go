@@ -3,7 +3,6 @@ package api
 import (
 	"github.com/gorilla/mux"
 
-	"main/src/infra/api/middlewares"
 	"main/src/infra/api/routes"
 )
 
@@ -11,8 +10,8 @@ import (
 var Router = func() *mux.Router {
 	router := mux.NewRouter()
 
-	router.Use(middlewares.AuthMiddleware)
 	routes.AuthRoutes(router)
+	routes.UsersRoutes(router)
 
 	return router
 }()
