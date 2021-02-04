@@ -9,6 +9,6 @@ import (
 type AuthController struct{}
 
 // TryAuthenticate ...
-func (authController AuthController) TryAuthenticate(authRequestDto dtos.AuthRequestDto) {
-	fmt.Println(authRequestDto)
+func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.AuthCredentialsDto) {
+	fmt.Println(authCredentialsDto)
 }
