@@ -3,8 +3,10 @@ package controllers
 import (
 	"main/src/application/dtos"
 	"main/src/infra/errors"
+	"main/src/infra/utils"
 	"net/http"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -13,23 +15,19 @@ import (
 // AuthController ...
 type AuthController struct{}
 
-type Claims struct {
-	userID int
-	jwt.StandardClaims
-}
-
 // TryAuthenticate ...
 func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.AuthCredentialsDto) (*dtos.AuthResponseDto, *errors.Http) {
 	expirationTime := time.Now().Add(2 * 24 * time.Hour)
-	userID := 1
-	claims := &Claims{
-		userID: userID,
+	userID := "1"
+	claims := &utils.Claims{
+		UserID: userID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(os.Getenv("JWT_SECRET_KEY")))
+	jwtSecretKey := []byte(os.Getenv("JWT_SECRET_KEY"))
+	tokenString, err := token.SignedString(jwtSecretKey)
 
 	if err != nil {
 		return nil, &errors.Http{
@@ -38,6 +36,8 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto dtos.Aut
 		}
 	}
 
-	authResponseDto := dtos.NewAuthResponseDto(userID, tokenString)
+	userIDParsed, _ := strconv.Atoi(userID)
+	authResponseDto := dtos.NewAuthResponseDto(userIDParsed, tokenString)
+
 	return authResponseDto, nil
 }
