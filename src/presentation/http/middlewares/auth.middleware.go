@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	. "main/src/infra/utils"
+	jwtauth "main/src/infra/utils/jwt"
 	"net/http"
 	"os"
 	"strings"
@@ -15,7 +15,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 		authorizationHeader := r.Header.Get("Authorization")
 		accessToken := strings.Split(authorizationHeader, " ")[1]
 
-		claims := &Claims{}
+		claims := &jwtauth.Claims{}
 		jwtSecretKey := []byte(os.Getenv("JWT_SECRET_KEY"))
 		token, err := jwt.ParseWithClaims(accessToken, claims, func(token *jwt.Token) (interface{}, error) {
 			return jwtSecretKey, nil
