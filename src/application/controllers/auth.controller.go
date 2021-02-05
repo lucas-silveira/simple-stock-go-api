@@ -16,7 +16,7 @@ import (
 type AuthController struct{}
 
 // TryAuthenticate ...
-func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCredentialsDto) (*AuthResponseDto, *errors.Http) {
+func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCredentialsDto) (AuthResponseDto, *errors.Http) {
 	expirationTime := time.Now().Add(2 * 24 * time.Hour)
 	userID := "1"
 	claims := &utils.Claims{
@@ -30,7 +30,7 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCred
 	tokenString, err := token.SignedString(jwtSecretKey)
 
 	if err != nil {
-		return nil, &errors.Http{
+		return AuthResponseDto{}, &errors.Http{
 			StatusCode: http.StatusInternalServerError,
 			Message:    "",
 		}

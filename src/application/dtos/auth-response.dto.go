@@ -7,8 +7,8 @@ type AuthResponseDto struct {
 }
 
 // NewAuthResponseDto is a factory function that generate a new AuthResponseDto
-func NewAuthResponseDto(userID int, token string) *AuthResponseDto {
-	return &AuthResponseDto{
+func NewAuthResponseDto(userID int, token string) AuthResponseDto {
+	return AuthResponseDto{
 		UserId:      userID,
 		AccessToken: token,
 	}
