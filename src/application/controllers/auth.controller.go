@@ -20,6 +20,7 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCred
 		return AuthResponseDto{}, &errors.Http{
 			StatusCode: http.StatusInternalServerError,
 			Message:    "",
+			Errors:     []string{},
 		}
 	}
 
