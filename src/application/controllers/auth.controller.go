@@ -17,11 +17,12 @@ func (authController AuthController) TryAuthenticate(authCredentialsDto AuthCred
 	accessToken, err := jwtauth.GenerateToken(userID)
 
 	if err != nil {
-		return AuthResponseDto{}, &errors.Http{
-			StatusCode: http.StatusInternalServerError,
-			Message:    "",
-			Errors:     []string{},
-		}
+		return AuthResponseDto{},
+			errors.NewHttpError(
+				http.StatusInternalServerError,
+				"",
+				[]string{},
+			)
 	}
 
 	userIDParsed, _ := strconv.Atoi(userID)

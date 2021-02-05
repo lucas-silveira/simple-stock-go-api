@@ -17,14 +17,18 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 	errorsMessage, err := validator.Validate(createUserDto)
 
 	if err != nil {
-		return &errors.Http{
-			StatusCode: http.StatusBadRequest,
-			Message:    "Existem alguns campos inválidos.",
-			Errors:     errorsMessage,
-		}
+		return errors.NewHttpError(
+			http.StatusBadRequest,
+			"Existem alguns campos inválidos.",
+			errorsMessage,
+		)
 	}
 
-	newUser := NewUser(createUserDto.Name, createUserDto.Email, createUserDto.Password)
+	newUser := NewUser(
+		createUserDto.Name,
+		createUserDto.Email,
+		createUserDto.Password,
+	)
 	fmt.Println(newUser)
 
 	return nil
