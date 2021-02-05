@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"main/src/infra/api"
+	. "main/src/presentation/http"
 
 	"github.com/gorilla/handlers"
 	"github.com/joho/godotenv"
@@ -20,6 +20,6 @@ func main() {
 		log.Fatalf("Error loading .env file")
 	}
 
-	loggedRoutes := handlers.LoggingHandler(os.Stdout, api.Router)
+	loggedRoutes := handlers.LoggingHandler(os.Stdout, Router)
 	log.Fatal(http.ListenAndServe(":3000", loggedRoutes))
 }

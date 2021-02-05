@@ -1,9 +1,9 @@
-package api
+package http
 
 import (
 	"github.com/gorilla/mux"
 
-	"main/src/infra/api/routes"
+	"main/src/presentation/http/routes"
 )
 
 // Router is mux Router struct that group all app routes

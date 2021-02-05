@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/gorilla/mux"
 
-	"main/src/infra/api/handlers"
+	"main/src/presentation/http/handlers"
 )
 
 // Auth group all routes of auth aggregation
