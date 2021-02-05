@@ -13,5 +13,6 @@ func Users(router *mux.Router) {
 
 	authRouter.Use(AuthMiddleware)
 
-	authRouter.HandleFunc("", handlers.GetAllUsers).Methods("GET")
+	authRouter.HandleFunc("", handlers.GetUsers).Methods("GET")
+	authRouter.HandleFunc("", handlers.PostUsers).Methods("POST")
 }
