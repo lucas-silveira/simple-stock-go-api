@@ -1,4 +1,8 @@
-package entities
+package user
+
+import (
+	. "main/src/shared"
+)
 
 // User is a entity that represents a user in ubiquitous language
 type User struct {
