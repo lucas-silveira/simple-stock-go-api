@@ -2,7 +2,7 @@ package validator
 
 import "github.com/go-playground/validator/v10"
 
-// Validate func validate a struct
+// Validate func validate a object
 func Validate(aStruct interface{}) ([]string, error) {
 	var errorsMessage []string
 	v := validator.New()

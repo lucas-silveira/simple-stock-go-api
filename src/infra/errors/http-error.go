@@ -1,6 +1,6 @@
 package errors
 
-// Http error is a struct error generic to excepetion http requests
+// Http error is a object error generic to excepetion http requests
 type Http struct {
 	StatusCode int      `json:"status_code"`
 	Message    string   `json:"message"`

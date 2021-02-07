@@ -6,7 +6,7 @@ import (
 	"main/src/presentation/http/routes"
 )
 
-// Router is mux Router struct that group all app routes
+// Router is a mux Router object that group all app routes
 var Router = func() *mux.Router {
 	router := mux.NewRouter()
 

@@ -6,7 +6,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-// Claims is a JWT struct
+// Claims is a JWT object
 type Claims struct {
 	UserID string `json:"user_id"`
 	jwt.StandardClaims

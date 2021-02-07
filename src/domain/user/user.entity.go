@@ -10,7 +10,7 @@ type User struct {
 	Name, Email, Password string
 }
 
-// NewUser is a factory function to create a new user struct
+// NewUser is a factory function to create a new user object
 func NewUser(name, email, password string) User {
 	user := User{}
 	user.SetName(name)

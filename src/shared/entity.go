@@ -1,6 +1,6 @@
 package shared
 
-// Entity is a abstract struct for entities structs
+// Entity is a abstract object for entities objects
 type Entity struct {
 	ID int
 }
