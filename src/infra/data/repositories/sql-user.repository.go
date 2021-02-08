@@ -2,7 +2,7 @@ package repositories
 
 import (
 	"database/sql"
-	"errors"
+	"fmt"
 	"main/src/domain/user"
 )
 
@@ -21,7 +21,7 @@ func (userRepo User) Save(user user.User) error {
 	_, err := userRepo.db.Exec("INSERT INTO users (name, email, password) VALUES(?,?,?)", user.Name, user.Email, user.Password)
 
 	if err != nil {
-		return errors.New("Houve um erro ao persistir o usuário no banco")
+		return fmt.Errorf("There was an error persisting the user in the database, err: %s", err)
 	}
 
 	return nil
