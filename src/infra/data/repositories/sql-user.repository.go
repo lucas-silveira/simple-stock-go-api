@@ -18,7 +18,7 @@ func NewUserRepository(db *sql.DB) *User {
 
 // Save persist user object into database
 func (userRepo User) Save(user user.User) error {
-	_, err := userRepo.db.Exec("INSERT INTO users (name, email, password) VALUES(?,?,?)", user.Name, user.Email, user.Password)
+	_, err := userRepo.db.Query("INSERT INTO users (name, email, password) VALUES($1, $2, $3)", user.Name, user.Email, user.Password)
 
 	if err != nil {
 		return fmt.Errorf("There was an error persisting the user in the database, err: %s", err)
