@@ -4,12 +4,23 @@ import (
 	"database/sql"
 	"fmt"
 	"log"
+	"main/src/infra/utils/envconfig"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 func connectionToPostgreSQL() *sql.DB {
+	var err error
+
+	err = envconfig.Load()
+
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
 	connectionString := fmt.Sprintf(
-		"host=%s user=%s password=%s dbname=%s",
+		"host=%s user=%s password=%s dbname=%s sslmode=disable",
 		os.Getenv("SQL_HOST"),
 		os.Getenv("SQL_USER"),
 		os.Getenv("SQL_PASSWORD"),

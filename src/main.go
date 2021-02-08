@@ -1,20 +1,18 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
 
+	"main/src/infra/utils/envconfig"
 	. "main/src/presentation/http"
 
 	"github.com/gorilla/handlers"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	envFile := fmt.Sprintf("%s.env", os.Getenv("APP_ENV"))
-	err := godotenv.Load(envFile)
+	err := envconfig.Load()
 
 	if err != nil {
 		log.Fatalf("Error loading .env file")
