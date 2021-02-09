@@ -36,7 +36,26 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		createUserDto.Email,
 		createUserDto.Password,
 	)
-	fmt.Println(newUser)
+
+	userExists, err := userRepository.FindByEmail(newUser.Email)
+
+	if err != nil {
+		fmt.Println(err)
+		return errors.NewHttpError(
+			http.StatusInternalServerError,
+			"Internal server error.",
+			[]string{},
+		)
+	}
+
+	if userExists != nil {
+		return errors.NewHttpError(
+			http.StatusBadRequest,
+			"The user already exists.",
+			[]string{},
+		)
+	}
+
 	err = userRepository.Save(newUser)
 
 	if err != nil {
