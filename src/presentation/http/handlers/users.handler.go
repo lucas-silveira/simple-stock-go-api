@@ -26,6 +26,8 @@ func PostUsers(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(err.StatusCode)
 		json.NewEncoder(w).Encode(err)
+
+		return
 	}
 
 	w.WriteHeader(http.StatusCreated)
