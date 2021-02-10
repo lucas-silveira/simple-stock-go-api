@@ -27,7 +27,7 @@ func AuthMiddleware(next http.Handler) http.Handler {
 				return
 			}
 
-			w.WriteHeader(http.StatusBadRequest)
+			w.WriteHeader(http.StatusUnauthorized)
 			return
 		}
 
