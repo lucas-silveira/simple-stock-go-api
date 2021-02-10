@@ -20,6 +20,13 @@ func (encryptor BcryptEncryptor) CreateHash(aString string) (string, error) {
 }
 
 // Validate a string with a hash
-func (encryptor BcryptEncryptor) Validate(aHash, aString string) (bool, error) {
-	return true, nil
+func (encryptor BcryptEncryptor) Validate(aHash, aString string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(aHash), []byte(aString))
+
+	if err != nil {
+		fmt.Println(err)
+		return false
+	}
+
+	return true
 }
