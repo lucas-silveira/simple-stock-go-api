@@ -4,6 +4,7 @@ import (
 	"fmt"
 	. "main/src/application/dtos"
 	"main/src/domain"
+	"main/src/domain/user"
 	. "main/src/domain/user"
 	"main/src/infra/data/drivers"
 	"main/src/infra/data/repositories"
@@ -15,13 +16,15 @@ import (
 
 // UserController ...
 type UserController struct {
-	encryptor domain.IEncryptor
+	userRepository user.IRepository
+	encryptor      domain.IEncryptor
 }
 
 // NewUserController is a factory that return a new UserController object
 func NewUserController() UserController {
+	userRepository := repositories.NewUserRepository(drivers.DBConnection)
 	encryptor := &encryptor.BcryptEncryptor{}
-	return UserController{encryptor: encryptor}
+	return UserController{userRepository, encryptor}
 }
 
 // CreateAnUser ...
@@ -37,9 +40,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		)
 	}
 
-	var userRepository IRepository
-	userRepository = repositories.NewUserRepository(drivers.DBConnection)
-	userExists, err := userRepository.FindByEmail(createUserDto.Email)
+	userExists, err := userController.userRepository.FindByEmail(createUserDto.Email)
 
 	if err != nil {
 		fmt.Println(err)
@@ -75,7 +76,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		passwordHashed,
 	)
 
-	err = userRepository.Save(newUser)
+	err = userController.userRepository.Save(newUser)
 
 	if err != nil {
 		fmt.Println(err)
