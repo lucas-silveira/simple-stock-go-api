@@ -5,7 +5,6 @@ import (
 	. "main/src/application/dtos"
 	"main/src/domain"
 	"main/src/domain/user"
-	. "main/src/domain/user"
 	"main/src/infra/data/drivers"
 	"main/src/infra/data/repositories"
 	"main/src/infra/errors"
@@ -51,7 +50,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		)
 	}
 
-	if *userExists != (User{}) {
+	if *userExists != (user.User{}) {
 		return errors.NewHttpError(
 			http.StatusBadRequest,
 			"The user already exists.",
@@ -70,7 +69,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		)
 	}
 
-	newUser := NewUser(
+	newUser := user.NewUser(
 		createUserDto.Name,
 		createUserDto.Email,
 		passwordHashed,
