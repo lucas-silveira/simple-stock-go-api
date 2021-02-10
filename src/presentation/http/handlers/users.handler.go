@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	. "main/src/application/controllers"
+	"main/src/application/controllers"
 	. "main/src/application/dtos"
 )
 
@@ -18,7 +18,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 // PostUsers handle post http request on users route and create a user
 func PostUsers(w http.ResponseWriter, r *http.Request) {
 	var createUserDto CreateUserDto
-	var userController UserController
+	userController := controllers.NewUserController()
 
 	json.NewDecoder(r.Body).Decode(&createUserDto)
 	err := userController.CreateAnUser(createUserDto)
