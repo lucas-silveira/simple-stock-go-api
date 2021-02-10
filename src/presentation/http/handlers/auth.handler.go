@@ -10,7 +10,7 @@ import (
 // PostAuth handle post http request on auth route
 func PostAuth(w http.ResponseWriter, r *http.Request) {
 	var authCredentialsDto AuthCredentialsDto
-	var authController controllers.AuthController
+	authController := controllers.NewAuthController()
 
 	json.NewDecoder(r.Body).Decode(&authCredentialsDto)
 	authResponseDto, err := authController.TryAuthenticate(authCredentialsDto)
@@ -18,6 +18,8 @@ func PostAuth(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(err.StatusCode)
 		json.NewEncoder(w).Encode(err)
+
+		return
 	}
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(authResponseDto)
