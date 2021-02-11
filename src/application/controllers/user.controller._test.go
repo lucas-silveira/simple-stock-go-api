@@ -11,10 +11,10 @@ import (
 	"testing"
 )
 
-const msgIndex = "test: %s failed - expected (%v) <> found (%v)."
-
 func TestCreateAnUser(t *testing.T) {
 	t.Parallel()
+
+	msgIndex := "test: %s failed - expected (%v) <> found (%v)."
 
 	fakeRepo := repositories.NewFakeUser()
 	encryptor := &encryptor.BcryptEncryptor{}
