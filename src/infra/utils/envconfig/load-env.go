@@ -9,11 +9,15 @@ import (
 
 // Load a env configuration
 func Load() error {
-	envFile := fmt.Sprintf("%s.env", os.Getenv("APP_ENV"))
-	err := godotenv.Load(envFile)
+	AppEnv := os.Getenv("APP_ENV")
 
-	if err != nil {
-		return err
+	if AppEnv != "test" {
+		envFile := fmt.Sprintf("%s.env", AppEnv)
+		err := godotenv.Load(envFile)
+
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
