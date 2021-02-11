@@ -15,7 +15,7 @@ func main() {
 	err := envconfig.Load()
 
 	if err != nil {
-		log.Fatalf("Error loading .env file")
+		log.Fatalf("Error loading .env file, err: %s", err)
 	}
 
 	loggedRoutes := handlers.LoggingHandler(os.Stdout, Router)

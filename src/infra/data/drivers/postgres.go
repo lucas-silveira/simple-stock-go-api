@@ -16,7 +16,7 @@ func connectionToPostgreSQL() *sql.DB {
 	err = envconfig.Load()
 
 	if err != nil {
-		log.Fatalf("Error loading .env file")
+		log.Fatalf("Error loading .env file, err: %s", err)
 	}
 
 	connectionString := fmt.Sprintf(
