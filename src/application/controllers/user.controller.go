@@ -15,8 +15,8 @@ import (
 
 // UserController ...
 type UserController struct {
-	userRepository user.IRepository
-	encryptor      domain.IEncryptor
+	UserRepository user.IRepository
+	Encryptor      domain.IEncryptor
 }
 
 // NewUserController is a factory that return a new UserController object
@@ -39,7 +39,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		)
 	}
 
-	userExists, err := userController.userRepository.FindByEmail(createUserDto.Email)
+	userExists, err := userController.UserRepository.FindByEmail(createUserDto.Email)
 
 	if err != nil {
 		fmt.Println(err)
@@ -58,7 +58,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		)
 	}
 
-	passwordHashed, err := userController.encryptor.CreateHash(createUserDto.Password)
+	passwordHashed, err := userController.Encryptor.CreateHash(createUserDto.Password)
 
 	if err != nil {
 		fmt.Println(err)
@@ -75,7 +75,7 @@ func (userController UserController) CreateAnUser(createUserDto CreateUserDto) *
 		passwordHashed,
 	)
 
-	err = userController.userRepository.Save(newUser)
+	err = userController.UserRepository.Save(newUser)
 
 	if err != nil {
 		fmt.Println(err)
